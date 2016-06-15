@@ -1,0 +1,34 @@
+<div class="container">
+    <div class="row row-content" ng-controller="DishDetailController">
+        <div clss="col-xs-12" ng-if="!showDish">
+                <h3>{{message}}</h3>
+        </div>
+        <div class="col-xs-12" ng-if="showDish">
+        <button class="btn btn-xs btn-primary pull-right" type="button" ui-sref="app.menu">Back to Menu </button>
+            <div class="media">
+                <div class="media-left media-middle">
+                    <a href="#">
+                        <img class="media-object img-thumbnail" ng-src="{{dish.image}}" alt="Uthappizza">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h2 class="media-heading">{{dish.name}} <span class="label label-danger label-xs">{{dish.label}}</span> 
+                        <span class="badge">{{dish.price}}</span></h2>
+                    <p>{{dish.description}}</p>
+                    <p><a class="btn btn-primary btn-xs" href="#">More &raquo;</a></p>
+                </div>
+            </div>
+        </div>
+        <input type="text" placeholder="Choose filter" ng-model="filt">
+        <div class="col-xs-9 col-xs-offset-1" ng-repeat="comment in dish.comments | orderBy:'-'+filt">
+            <blockquote>
+                <p>Rating: {{comment.rating}}</p>
+                <p>Comment: {{comment.comment}}</p>
+                <footer>
+                    Author: {{comment.author}} Date:
+                    <cite title="date">{{comment.date|date:"MM/dd/yyyy @ h:mma"}}</cite>
+                </footer>
+            </blockquote>
+        </div>
+    </div>
+</div>
